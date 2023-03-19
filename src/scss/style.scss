@@ -17,7 +17,6 @@
 
 body {
     margin: 0 auto;
-    background-color: aqua;
     width: 100vw;
     height: 100vh;
     background-image: url(@img/4.png);
@@ -227,6 +226,17 @@ h1 {
     line-height: 0.8125rem;
 }
 
+.reduceAdvantages {
+    font-size: 0.9375rem;
+}
+
+@media (max-height: 820px) {
+
+    .reduceHeader {
+        font-size: 1.6rem;
+    }
+}
+
 @media (max-height: 800px) {
     header {
         padding-bottom: 170px;
@@ -277,7 +287,7 @@ h1 {
             .advantages {
                 margin-bottom: 4px;
                 width: 125px;
-                font-size: 0.9375rem;
+                font-size: 0.8rem;
             }
 
             .description {

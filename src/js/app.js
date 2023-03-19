@@ -16,7 +16,7 @@ const requestedLanguage = params.get("lang")
 const languages = ['en', 'es', 'fr', 'ja', 'nl', 'ru', 'zh']
 const leftChoise = 'https://apple.com/'
 const rightChoise = 'https://google.com/'
-const wrapper = document.getElementById("wrapper");
+const wrapper = document.getElementById("body");
 
 let userlanguage = navigator.language.substring(0, 2).toLowerCase()
 
@@ -52,6 +52,8 @@ switch (currentLanguage) {
         break;
 }
 
+
+
 let userChoise = null
 
 const sumbitChoise = () => {
@@ -76,7 +78,7 @@ const createHTML = (localization) => {
         <a href="#" class="restore">${localization['Restore']}</a>
     </header>
     <!-- <main> -->
-    <h1>${localization['Unlimited Access<br>to All Features']}</h1>
+    <h1 id="mainTitle">${localization['Unlimited Access<br>to All Features']}</h1>
     <section class="features">
         <ul class="features-set">
             <li class="features-item"><a href="#" id="unlimitedLink">
@@ -99,7 +101,7 @@ const createHTML = (localization) => {
                 <div class="subscription-terms">
                     ${localization['<strong>{{price}}</strong><br>per month'].replace(/{{price}}/g, '$9.99')}
                 </div>
-                <strong class="advantages">${localization['3 DAYS FREE']}</strong>
+                <strong class="advantages" id="advantagesMonthly">${localization['3 DAYS FREE']}</strong>
                 <p class="description">${localization['{{price}}/month'].replace(/{{price}}/g, '$9.99')}</p>
             </section>
         </li>
@@ -114,7 +116,7 @@ const createHTML = (localization) => {
                 <div class="subscription-terms">
                     ${localization['<strong>{{price}}</strong><br>per year'].replace(/{{price}}/g, '$19.99')}
                 </div>
-                <strong class="advantages">${localization['MOST POPULAR']}</strong>
+                <strong class="advantages" id="advantagesAnnually">${localization['MOST POPULAR']}</strong>
                 <p class="description">${localization['{{price}}/month'].replace(/{{price}}/g, '$1.66')}</p>
             </section>
         </li>
@@ -135,7 +137,6 @@ const createHTML = (localization) => {
 
 wrapper.innerHTML = createHTML(localization)
 
-
 const monthlyChoise = document.getElementById("monthlyChoise");
 const annuallyChoise = document.getElementById("annuallyChoise");
 const sumbit = document.getElementById("sumbit");
@@ -144,12 +145,25 @@ const headerLink = document.getElementById("headerLink")
 const unlimitedLink = document.getElementById("unlimitedLink");
 const exportLink = document.getElementById("exportLink");
 const noAdsLink = document.getElementById("noAdsLink");
-
+const mainTitle = document.getElementById("mainTitle");
+const advantagesMonthly = document.getElementById("advantagesMonthly");
+const advantagesAnnually = document.getElementById("advantagesAnnually");
 
 addImg("img/icons/close.svg", "close", "close", headerLink)
 addImg("img/unlimitedDocs.svg", "feature-img", "unlimited Docs", unlimitedLink)
 addImg("img/export.svg", "feature-img", "export", exportLink)
 addImg("img/noAds.svg", "feature-img", "no Ads", noAdsLink)
+
+if(localization['Unlimited Access<br>to All Features'].length> 37){
+    mainTitle.classList.add('reduceHeader')
+}
+
+if(localization['3 DAYS FREE'].length> 13){
+    advantagesMonthly.classList.add('reduceAdvantages')
+    advantagesAnnually.classList.add('reduceAdvantages')
+
+    console.log(localization['3 DAYS FREE'].length);
+}
 
 const setMonthly = () => {
     userChoise = leftChoise
