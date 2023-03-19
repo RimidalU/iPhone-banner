@@ -11,13 +11,14 @@ import zhLocal from '../Localizations/zh.json' assert { type: 'json' }
 isWebp()
 
 const languages = ['en', 'es', 'fr', 'ja', 'nl', 'ru', 'zh']
-
 const leftChoise = 'https://apple.com/'
 const rightChoise = 'https://google.com/'
 const wrapper = document.getElementById("wrapper");
 
 const userlanguage = navigator.language.substring(0, 2).toLowerCase()
-const currentLanguage = languages.includes(userlanguage) ? userlanguage : 'en'
+// const currentLanguage = languages.includes(userlanguage) ? userlanguage : 'en'
+const currentLanguage = 'en'
+
 
 let localization = enLocal
 
@@ -45,37 +46,24 @@ switch (currentLanguage) {
         break;
 }
 
-
-console.log(localization['-83%']);
-
-let userChoise = leftChoise
-
-const setMonthly = () => {
-    userChoise = leftChoise
-}
-
-const setAnnually = () => {
-    userChoise = rightChoise
-}
+let userChoise = null
 
 const sumbitChoise = () => {
-    return location.href = `${userChoise}?lang=${currentLanguage}`
+    if (userChoise) {
+        return location.href = `${userChoise}?lang=${currentLanguage}`
+    }
 }
 
 const addImg = (src, className, alt, parent) => {
-
     const img = new Image();
     img.src = src
     img.setAttribute("class", className)
     img.setAttribute("alt", alt)
-
     parent.prepend(img);
 }
 
-
 const createHTML = (localization) => {
-    return `
-    <div class="wrapper">
+    return `<div class="wrapper">
     <header class="header">
         <a href="#" id="headerLink">
         </a>
@@ -96,41 +84,35 @@ const createHTML = (localization) => {
                 </a></li>
         </ul>
     </section>
-    <section class="subscription">
-        <ul class="subscription-set">
-            <a href="#" id="monthlyChoise">
-                <li class="subscription-item monthly-item">
-                    <section class="subscription-body">
-                        <h3 class="subscription-title">
-                            ${localization['Monthly']}
-                        </h3>
-                        <div class="subscription-terms">
-                            ${localization['<strong>{{price}}</strong><br>per month'].replace(/{{price}}/g, '$9.99')}
-                        </div>
-                        <strong class="advantages">${localization['3 DAYS FREE']}</strong>
-                        <p class="description">${localization['{{price}}/month'].replace(/{{price}}/g, '$9.99')}</p>
-                    </section>
-                </li>
-            </a>
-            <a href="#" id="annuallyChoise">
-                <li class="subscription-item annually-item">
-                    <section class="subscription-body">
-                        <div class="discount">
-                            <div class="discount-title">${localization['-83%']}</div>
-                        </div>
-                        <h3 class="subscription-title">
-                            ${localization['Annually']}
-                        </h3>
-                        <div class="subscription-terms">
-                            ${localization['<strong>{{price}}</strong><br>per year'].replace(/{{price}}/g, '$19.99')}
-                        </div>
-                        <strong class="advantages">${localization['MOST POPULAR']}</strong>
-                        <p class="description">${localization['{{price}}/month'].replace(/{{price}}/g, '$1.66')}</p>
-                    </section>
-                </li>
-            </a>
-        </ul>
-    </section>
+    <ul class="subscription-set">
+        <li class="subscription-item monthly-item" id="monthlyChoise">
+            <section class="subscription-body">
+                <h3 class="subscription-title">
+                    ${localization['Monthly']}
+                </h3>
+                <div class="subscription-terms">
+                    ${localization['<strong>{{price}}</strong><br>per month'].replace(/{{price}}/g, '$9.99')}
+                </div>
+                <strong class="advantages">${localization['3 DAYS FREE']}</strong>
+                <p class="description">${localization['{{price}}/month'].replace(/{{price}}/g, '$9.99')}</p>
+            </section>
+        </li>
+        <li class="subscription-item annually-item" id="annuallyChoise">
+            <section class="subscription-body">
+                <div class="discount">
+                    <div class="discount-title">${localization['-83%']}</div>
+                </div>
+                <h3 class="subscription-title">
+                    ${localization['Annually']}
+                </h3>
+                <div class="subscription-terms">
+                    ${localization['<strong>{{price}}</strong><br>per year'].replace(/{{price}}/g, '$19.99')}
+                </div>
+                <strong class="advantages">${localization['MOST POPULAR']}</strong>
+                <p class="description">${localization['{{price}}/month'].replace(/{{price}}/g, '$1.66')}</p>
+            </section>
+        </li>
+    </ul>
     <a href="#" class="continue" id="sumbit">${localization['Continue']}</a>
     <!-- <button class="continue">Continue </button> -->
     <p class="features-info">${localization['Auto-renewable. Cancel anytime.']}</p>
@@ -140,10 +122,9 @@ const createHTML = (localization) => {
             <li><a class="footer-link" href="#">${localization['Terms of Use']}</a></li>
             <li><a class="footer-link" href="#">${localization['Privacy Policy']}</a></li>
         </ul>
+        <div class="indicator"></div>
     </footer>
-    <div class="indicator"></div>
-</div>
-    `
+</div>` 
 }
 
 wrapper.innerHTML = createHTML(localization)
@@ -164,6 +145,19 @@ addImg("img/unlimitedDocs.svg", "feature-img", "unlimited Docs", unlimitedLink)
 addImg("img/export.svg", "feature-img", "export", exportLink)
 addImg("img/noAds.svg", "feature-img", "no Ads", noAdsLink)
 
+const setMonthly = () => {
+    userChoise = leftChoise
+    sumbit.classList.add('active')
+    annuallyChoise.classList.remove('active-item')
+    monthlyChoise.classList.add('active-item')
+}
+
+const setAnnually = () => {
+    userChoise = rightChoise
+    sumbit.classList.add('active')
+    monthlyChoise.classList.remove('active-item')
+    annuallyChoise.classList.add('active-item')
+}
 
 monthlyChoise.addEventListener("click", setMonthly)
 annuallyChoise.addEventListener('click', setAnnually)
