@@ -81,10 +81,6 @@ h1 {
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.684495);
 }
 
-.subscription-title {
-    margin-bottom: 14px;
-}
-
 .subscription-set {
     margin: 0 auto;
     height: 178px;
@@ -108,6 +104,10 @@ h1 {
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .subscription-title {
+            margin-bottom: 14px;
+        }
 
         .subscription-terms {
             display: flex;
@@ -202,21 +202,21 @@ h1 {
     left: 0;
     right: 0;
     margin: 0 auto;
-}
 
-.footer-set {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 24px;
-    margin-bottom: 25px;
-}
+    .footer-set {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 24px;
+        margin-bottom: 25px;
+    }
 
-.indicator {
-    margin: 0 auto 8px;
-    width: 134px;
-    height: 5px;
-    background: #FFFFFF;
-    border-radius: 100px;
+    .indicator {
+        margin: 0 auto 8px;
+        width: 134px;
+        height: 5px;
+        background: #FFFFFF;
+        border-radius: 100px;
+    }
 }
 
 .features-info,
@@ -224,4 +224,119 @@ h1 {
     font-family: 'Roboto', sans-serif;
     font-size: 0.6875rem;
     line-height: 0.8125rem;
+}
+
+@media (max-height: 800px) {
+    header {
+        padding-bottom: 170px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        line-height: 2.1rem;
+        margin-bottom: 10px;
+    }
+
+    .features {
+        margin-bottom: 20px;
+
+        .feature-img {
+            scale: 0.9;
+        }
+
+        .features-item {
+            font-size: 1rem;
+            line-height: 1.6rem;
+        }
+    }
+
+    .subscription-set {
+        margin: 0 auto;
+        height: 140px;
+    }
+
+
+    .subscription-item {
+        height: 140px;
+
+        .subscription-body {
+            .subscription-title {
+                margin-bottom: 7px;
+            }
+
+            .subscription-terms {
+                font-size: 0.9rem;
+                padding-bottom: 6px;
+
+                strong {
+                    font-size: 1.3rem;
+                }
+            }
+
+            .advantages {
+                margin-bottom: 4px;
+                width: 125px;
+                font-size: 0.9375rem;
+            }
+
+            .description {
+                margin-bottom: 8px;
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    .features-info {
+        margin-bottom: 10px;
+    }
+
+    .annually-item {
+        .discount {
+            height: 28px;
+            width: 28px;
+            top: 0;
+            right: 7px;
+
+            .discount-title {
+                font-size: 0.6rem;
+            }
+        }
+    }
+
+    .continue {
+        height: 48px;
+        margin: 36px auto 26px;
+        border-radius: 30px;
+        padding: 17px 105px;
+        font-size: 0.9rem;
+        line-height: 0.9rem;
+    }
+
+    .footer {
+        .footer-set {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+
+@media (max-height: 730px) {
+
+    header {
+        padding-bottom: 148px;
+    }
+
+    .features {
+        margin-bottom: 10px;
+    }
+
+    .continue {
+        margin: 25px auto 12px;
+    }
+
+    .footer {
+        .footer-set {
+            margin-bottom: 12px;
+        }
+    }
 }
