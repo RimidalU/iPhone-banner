@@ -10,15 +10,21 @@ import zhLocal from '../Localizations/zh.json' assert { type: 'json' }
 
 isWebp()
 
+let params = new URLSearchParams(location.search);
+const requestedLanguage = params.get("lang")
+
 const languages = ['en', 'es', 'fr', 'ja', 'nl', 'ru', 'zh']
 const leftChoise = 'https://apple.com/'
 const rightChoise = 'https://google.com/'
 const wrapper = document.getElementById("wrapper");
 
-const userlanguage = navigator.language.substring(0, 2).toLowerCase()
-// const currentLanguage = languages.includes(userlanguage) ? userlanguage : 'en'
-const currentLanguage = 'en'
+let userlanguage = navigator.language.substring(0, 2).toLowerCase()
 
+if (requestedLanguage) {
+    userlanguage = requestedLanguage
+}
+
+const currentLanguage = languages.includes(userlanguage) ? userlanguage : 'en'
 
 let localization = enLocal
 
@@ -50,7 +56,7 @@ let userChoise = null
 
 const sumbitChoise = () => {
     if (userChoise) {
-        return location.href = `${userChoise}?lang=${currentLanguage}`
+        return location.href = userChoise
     }
 }
 
@@ -124,7 +130,7 @@ const createHTML = (localization) => {
         </ul>
         <div class="indicator"></div>
     </footer>
-</div>` 
+</div>`
 }
 
 wrapper.innerHTML = createHTML(localization)
